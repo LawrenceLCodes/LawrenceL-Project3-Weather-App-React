@@ -1,5 +1,7 @@
 import './App.css';
+import { useEffect } from 'react';
 import mySwal from './SweetAlert.js';
+import axios from 'axios';
 
 // Pseudo Code:
 // MVP:
@@ -33,6 +35,23 @@ import mySwal from './SweetAlert.js';
 // Considering a selector for celsius and Farenheit.
 
 function App() {
+// The following useEffect Hook is required to obtain the API data from Open Weather
+useEffect( () => {
+  const apiKey = 'b4a714fe3bfd1719fc214f0b9702a68c';
+  axios({
+    method: "GET",
+    url: `api.openweathermap.org/data/2.5/weather`,
+    dataResponse: "json",
+    params: {
+      key: apiKey,
+      format: "json",
+    }
+  }).then( (response => {
+    console.log(response);
+  }))
+})
+
+
   return (
     <div className="App wrapper">
       <h1>Today's Weather!</h1>
