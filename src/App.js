@@ -1,9 +1,9 @@
-
 import './App.css';
+import mySwal from './SweetAlert.js';
 
 // Pseudo Code:
 // MVP:
-// Create a React weather application where the user can type in their desired city and be 		provided with results.
+// Create a React weather application where the user can type in their desired city and be provided with results.
 
 // Results will include: 
 // Temperature, 

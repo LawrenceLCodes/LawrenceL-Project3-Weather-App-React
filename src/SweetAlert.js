@@ -1,22 +1,20 @@
-// import Swal from 'sweetalert2';
-// import withReactContent from 'sweetalert2-react-content';
+// Sweet Alert JavaScript component used to improve alerts for users.
 
-// function SweetAlert () {
-//     return(
-//     const MySwal = withReactContent(Swal)
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
-//     MySwal.fire({
-//         title: <p>Hello World</p>,
-//         footer: 'Copyright 2018',
-//         didOpen: () => {
-//             // `MySwal` is a subclass of `Swal`
-//             //   with all the same instance & static methods
-//             MySwal.clickConfirm()
-//         }
-//     }).then(() => {
-//         return MySwal.fire(<p>Shorthand works too</p>)
-//     })
-//     )
-// }
+    const mySwal = withReactContent(Swal)
 
-// export default SweetAlert;
+    mySwal.fire({
+        title: <p>Hello World</p>,
+        footer: 'Copyright 2018',
+        didOpen: () => {
+            // `MySwal` is a subclass of `Swal`
+            //   with all the same instance & static methods
+            mySwal.clickConfirm()
+        }
+    }).then(() => {
+        return mySwal.fire(<p>Shorthand works too</p>)
+    })
+
+export default mySwal;
