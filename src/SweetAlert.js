@@ -14,7 +14,15 @@ import withReactContent from 'sweetalert2-react-content';
             mySwal.clickConfirm()
         }
     }).then(() => {
-        return mySwal.fire(<p>Shorthand works too</p>)
+        return mySwal.fire(<p>Welcome!</p>)
     })
+    // Catch is used to generate an alert if an incompatible city name has been entered. 
+    // .catch(err => mySwal({
+    //     title: "City Name Not Found",
+    //     icon: "error",
+    //     text: "Please check your entry and try again!",
+    //     timer: 4000,
+    // })
+    // );
 
 export default mySwal;

@@ -35,20 +35,29 @@ import axios from 'axios';
 // Considering a selector for celsius and Farenheit.
 
 function App() {
-// The following useEffect Hook is required to obtain the API data from Open Weather
+// The following useEffect Hook is required to obtain the API data from Open Weather map.
 useEffect( () => {
   const apiKey = 'b4a714fe3bfd1719fc214f0b9702a68c';
   axios({
     method: "GET",
-    url: `api.openweathermap.org/data/2.5/weather`,
+    url: `https://api.openweathermap.org/data/2.5/weather/`,
     dataResponse: "json",
     params: {
-      key: apiKey,
-      format: "json",
+      appid: apiKey,
+      lang: "en",
+      q: "Toronto",
     }
   }).then( (response => {
     console.log(response);
   }))
+  // Catch is used to generate an alert if an incompatible city name has been entered. 
+  .catch(error => mySwal({
+      title: "City Name Not Found",
+      icon: "error",
+      text: "Please check your entry and try again!",
+      timer: 4000,
+    })
+  );
 })
 
 
