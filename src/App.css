@@ -8,20 +8,93 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
+/* font-family: 'Inconsolata', monospace;
+font-family: 'Ubuntu', sans-serif; */
+
+html {
+  font-size: 62.5%;
+}
+
 body {
-  font-family: 'montseratt', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: skyblue;
+  background: cover;
+}
+
+footer {
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .App {
   text-align: center;
 }
 
-.searchBox {
+/* .searchBox {
   width: 75%;
   margin: 0 0 75px;
   border-radius: 10px 10px;
   box-shadow: 0px 5px rgba( 0, 0, 0, 0.2);
+} */
+
+.mainTitle {
+  font-size: 50px;
+  font-weight: 800;
+  margin-bottom: 20px;
 }
 
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
 
+.searchField {
+  width: 70%;
+  height: 50px;
+  padding: 10px;
+  border: 3px solid midnightblue;
+  border-radius: 15px 15px;
+  background: black;
+  color: white;
+  font-size: 2rem;
+}
 
+.submit {
+  width: 20%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 15px 15px;
+  background-color: rgba(255, 255, 0, 0.829);
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.submit:hover,
+.submit:active {
+  background: linear-gradient(45deg, #FF4500 30%, #FFD700 80% );
+}
+
+.weatherResultsContainer {
+  width: 70%;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+/* Media queries will go here:  */
+@media screen and (max-width: 600px) {
+  .search-field {
+    width: 70%;
+  }
+
+  .submit {
+    width: 15%;
+    font-size: 1.2rem;
+  }
+}

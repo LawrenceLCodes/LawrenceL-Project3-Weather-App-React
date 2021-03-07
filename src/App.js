@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import { useEffect, useState } from 'react';
 import {mySwal} from './SweetAlert.js';
-import axios from 'axios';
-import getWeatherData from './GetWeatherApi.js';
+import { getWeatherData } from './GetWeatherApi.js';
+import { WiDaySunny, WiCloudy, WiDayRainWind } from 'react-icons/wi';
+import { GiModernCity } from 'react-icons/gi';
 
 // Pseudo Code:
 // MVP:
@@ -44,7 +45,9 @@ import getWeatherData from './GetWeatherApi.js';
 
 
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
+  // useStates were created here for the weather data from component as well as the search city query.
+  // useState was set to null to prevent unnecessary updates.
+  const [getWeatherData, setGetWeatherData] = useState(null);
   const [searchCity, setSearchCity] = useState('Toronto');
   const [loading, setLoading] = useState(false);
 
@@ -52,8 +55,8 @@ function App() {
     try{
       setLoading(true);
       const cityData = await getWeatherData(searchCity);
-      setWeatherData(cityData);
-      setLoading(false);
+      setGetWeatherData(cityData);
+      // setLoading(false);
     }catch(error) {
       console.log(error.message);
       setLoading(false);
@@ -110,15 +113,18 @@ function App() {
   //     timer: 4000,
   //   })
   // );
-  }, []);
+  },);
+
+  
 
   return (
-    <main className="App wrapper">
-      <h1>Today's Weather!</h1>
+    <div className="App wrapper">
+      <header>
+        <h1 className="mainTitle"> <WiDaySunny /> Today's Weather! <WiCloudy /></h1>
+      </header>
+      
 
       <fieldset className="searchForm">
-        <legend>Get today's forecast</legend>
-
         {/* Text field where user will type in the city for their desired weather forecast */}
         <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
         <input type="text"
@@ -126,7 +132,6 @@ function App() {
         placeholder="Enter your city"
         onChange={event => setSearchCity(event.target.value)}
         value={searchCity}
-        // onKeyPress={searchCity}
         />
 
          {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
@@ -135,8 +140,30 @@ function App() {
 
       {/* Forecast information will be passed into the following elements and displayed here: */}
       {/* {weatherData( (data) => { */}
-      <h2>{weatherData.name}</h2>
-      <section className="temperature">
+      
+        <main className="weatherResultsContainer">
+          <h2>Forecast</h2>
+          <div className="iconImage">
+            <WiDayRainWind />
+          </div>
+          <h3>Cloudy with a chance of rain</h3>
+          <div className="temperature">
+            <p>22&deg;C</p>
+            <p>Feels like: 26&deg;</p>
+          </div>
+          <div>
+            <h4><GiModernCity /> Toronto | Canada</h4>
+          </div>
+          <div className="temperatureRange">
+            <p>High: 20&deg;C || Low: 10&deg;C</p>
+            <p>Humidity: 15%</p>
+            <p>Wind speed: 5kph</p>
+          </div>
+        </main>
+        
+      
+      
+      {/* <section className="temperature">
         <> 
             <h2>Temperature & Humidity:</h2>    
             <p>Temperature: {weatherData.main.temp}</p>
@@ -146,22 +173,23 @@ function App() {
             <p>Humidity: {weatherData.main.humidity}</p>
             <p>Atmospheric Pressure: {weatherData.main.pressure}</p>
         </>
-      </section>
+      </section> */}
         
-      <section className="conditions">
+      {/* <section className="conditions">
         <h3>Weather Conditions:</h3>
         <div>
           {weatherData.weather[0].main}
           <p>{weatherData.wind.speed} meters/sec</p>
         </div>
-      </section>
+      </section> */}
         
       
 
       <footer>
         <p> Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by <a href="https://github.com/LawrenceLCodes">Lawrence Lee</a></p>
       </footer>
-    </main>
+    </div>
+    
     );
 }
 
