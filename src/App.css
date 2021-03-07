@@ -8,14 +8,20 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
+body {
+  font-family: 'montseratt', sans-serif;
+}
 
 .App {
   text-align: center;
 }
 
-body.dark-mode {
-  background-color: black;
-  color: white;
+.searchBox {
+  width: 75%;
+  margin: 0 0 75px;
+  border-radius: 10px 10px;
+  box-shadow: 0px 5px rgba( 0, 0, 0, 0.2);
 }
+
 
 

@@ -14,7 +14,7 @@ import withReactContent from 'sweetalert2-react-content';
             mySwal.clickConfirm()
         }
     }).then(() => {
-        return mySwal.fire(<p>Welcome!</p>)
+        return mySwal.fire(<p>Welcome! Please type in your city for today's forecast!</p>)
     })
     // Catch is used to generate an alert if an incompatible city name has been entered. 
     // .catch(err => mySwal({
