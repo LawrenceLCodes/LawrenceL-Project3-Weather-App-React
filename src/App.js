@@ -116,13 +116,13 @@ function App() {
     <main className="App wrapper">
       <h1>Today's Weather!</h1>
 
-      <fieldset>
-        <legend></legend>
+      <fieldset className="searchForm">
+        <legend>Get today's forecast</legend>
 
         {/* Text field where user will type in the city for their desired weather forecast */}
-        <label htmlFor=""></label>
+        <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
         <input type="text"
-        className="searchBox" 
+        className="searchField" 
         placeholder="Enter your city"
         onChange={event => setSearchCity(event.target.value)}
         value={searchCity}
@@ -130,8 +130,7 @@ function App() {
         />
 
          {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
-        <label htmlFor=""></label>
-        <button>Get Forecast</button>
+        <button className="submit" onClick={ () => displayWeatherData()}>Get Forecast</button>
       </fieldset>
 
       {/* Forecast information will be passed into the following elements and displayed here: */}

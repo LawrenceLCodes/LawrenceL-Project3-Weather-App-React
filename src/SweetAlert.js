@@ -6,8 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
     const mySwal = withReactContent(Swal)
 
     mySwal.fire({
-        title: <p>Hello World</p>,
-        footer: 'Copyright 2018',
+        title: <p>Welcome!</p>,
         didOpen: () => {
             // `MySwal` is a subclass of `Swal`
             //   with all the same instance & static methods
