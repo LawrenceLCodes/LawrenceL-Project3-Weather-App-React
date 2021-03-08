@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import {mySwal} from './SweetAlert.js';
 import { getWeatherData } from './GetWeatherApi.js';
 import { WiDaySunny, WiCloudy, WiDayRainWind } from 'react-icons/wi';
 import { GiModernCity } from 'react-icons/gi';
+import { GiAtom, GiSpaceship } from 'react-icons/gi';
 
 // Pseudo Code:
 // MVP:
@@ -46,22 +48,23 @@ import { GiModernCity } from 'react-icons/gi';
 
 function App() {
   // useStates were created here for the weather data from component as well as the search city query.
-  // useState was set to null to prevent unnecessary updates.
-  const [getWeatherData, setGetWeatherData] = useState(null);
+  // Initializae useState for API data.
+  const [weatherData, setWeatherData] = useState([]);
+  // useState for saving input from the user and returning a value based on the city that the user typed in the search field.
   const [searchCity, setSearchCity] = useState('Toronto');
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const displayWeatherData = async () => {
-    try{
-      setLoading(true);
-      const cityData = await getWeatherData(searchCity);
-      setGetWeatherData(cityData);
-      // setLoading(false);
-    }catch(error) {
-      console.log(error.message);
-      setLoading(false);
-    }
-  }
+  // const displayWeatherData = async () => {
+  //   try{
+  //     setLoading(true);
+  //     const cityData = await getWeatherData(searchCity);
+  //     setGetWeatherData(cityData);
+  //     // setLoading(false);
+  //   }catch(error) {
+  //     console.log(error.message);
+  //     setLoading(false);
+  //   }
+  // }
 
   
 
@@ -87,24 +90,25 @@ function App() {
 
 // The following useEffect Hook is required to obtain the API data from Open Weather map.
   useEffect( () => {
-    displayWeatherData();
-    // const apiKey = 'b4a714fe3bfd1719fc214f0b9702a68c';
+    // Store API Key in a variable: 
+    const apiKey = 'b4a714fe3bfd1719fc214f0b9702a68c';
 
-    // axios({
-    //   method: "GET",
-    //   url: `https://api.openweathermap.org/data/2.5/weather/`,
-    //   dataResponse: "json",
-    //   params: {
-    //     appid: apiKey,
-    //     lang: "en",
-    //     units: "metric",
-    //     q: 'Toronto',
-    //   }
-    // }).then( (response) => {
-    //   console.log(response);
+    // Use Axios to handle API request from URL endpoint and include search params.
+    axios({
+      method: "GET",
+      url: `https://api.openweathermap.org/data/2.5/weather/`,
+      dataResponse: "json",
+      params: {
+        appid: apiKey,
+        lang: "en",
+        units: "metric",
+        q: 'Toronto',
+      }
+    }).then( (response) => {
+      console.log(response);
       
-    //   setWeatherData(response.data);
-    // });
+      setWeatherData(response.data);
+    });
   // Catch is used to generate an alert if an incompatible city name has been entered. 
   // .catch(error => mySwal({
   //     title: "City Name Not Found",
@@ -113,7 +117,7 @@ function App() {
   //     timer: 4000,
   //   })
   // );
-  },);
+  }, []);
 
   
 
@@ -135,7 +139,7 @@ function App() {
         />
 
          {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
-        <button className="submit" onClick={ () => displayWeatherData()}>Get Forecast</button>
+        <button className="submit" onClick={ () => setWeatherData(searchCity)}>Get Forecast</button>
       </fieldset>
 
       {/* Forecast information will be passed into the following elements and displayed here: */}
@@ -144,20 +148,20 @@ function App() {
         <main className="weatherResultsContainer">
           <h2>Forecast</h2>
           <div className="iconImage">
-            <WiDayRainWind />
+            <img src={`http://openweathermap.org/img/w/${setWeatherData.weather[0].icon}.png`} alt="imgicon"/>
           </div>
-          <h3>Cloudy with a chance of rain</h3>
+          <p>Cloudy with a chance of rain</p>
           <div className="temperature">
             <p>22&deg;C</p>
             <p>Feels like: 26&deg;</p>
-          </div>
-          <div>
-            <h4><GiModernCity /> Toronto | Canada</h4>
           </div>
           <div className="temperatureRange">
             <p>High: 20&deg;C || Low: 10&deg;C</p>
             <p>Humidity: 15%</p>
             <p>Wind speed: 5kph</p>
+          </div>
+          <div>
+            <h3><GiModernCity /> Toronto | Canada</h3>
           </div>
         </main>
         
@@ -185,8 +189,8 @@ function App() {
         
       
 
-      <footer>
-        <p> Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by <a href="https://github.com/LawrenceLCodes">Lawrence Lee</a></p>
+      <footer className="footer">
+        <p><GiAtom /> Created at <a href="https://www.junocollege.com">Juno College</a> 2021 by <a href="https://github.com/LawrenceLCodes">Lawrence Lee</a> <GiSpaceship /></p>
       </footer>
     </div>
     

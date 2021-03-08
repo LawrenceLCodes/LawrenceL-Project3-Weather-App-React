@@ -21,6 +21,23 @@ body {
   background: cover;
 }
 
+html, body {
+  height: 100%;
+}
+
+main {
+  /* min-height: 800px; */
+  height: auto;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 2rem;
+}
+
 footer {
   font-family: 'Inconsolata', monospace;
   font-weight: bold;
@@ -81,11 +98,43 @@ a {
 }
 
 .weatherResultsContainer {
-  width: 70%;
+  width: 50%;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   margin-top: 30px;
+  border: 2px solid midnightblue;
+  border-radius: 15px;
+  box-shadow: 10px 15px navy;
+  padding: 30px 0px;
 }
+
+.weatherResultsContainer h2 {
+  font-size: 3.5rem;
+}
+
+.footer {
+  height: 40px;
+  color: #f6f7d7;
+  background-color: #171614d5;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a:hover,
+.footer a:active {
+  color: #e61809;
+  transition-delay: 0.2s;
+}
+
+/* .react-icons {
+  transition: 0.7s cubic-bezier(.47,.73,.53,1.46);
+}
+
+.react-icons a:hover {
+  transform: scale(1.08);
+} */
 
 /* Media queries will go here:  */
 @media screen and (max-width: 600px) {
