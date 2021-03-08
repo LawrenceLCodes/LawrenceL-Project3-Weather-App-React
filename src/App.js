@@ -106,7 +106,7 @@ function App() {
         q: 'Toronto',
       }
     }).then( (response) => {
-      console.log(response);
+      // console.log(response);
       
       setWeatherData(response.data);
     });
@@ -149,16 +149,16 @@ function App() {
         <main className="weatherResultsContainer">
           <h2>Forecast</h2>
           <div className="iconImage">
-            {/* <img src={`http://openweathermap.org/img/w/${setWeatherData.weather[0].icon}.png`} alt="imgicon"/> */}
+            <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} alt="imageicon"/>
           </div>
           <div className="temperature">
-            <p>Temp: 22&deg;C</p>
-            <p>Feels like: 26&deg;</p>
+            <p>Temp: {parseFloat(weatherData.main.temp).toFixed(1)} &deg;C</p>
+            <p>Feels like: {parseFloat(weatherData.main.feels_like).toFixed(1)} &deg;C</p>
           </div>
           <p>Cloudy with a chance of rain</p>
           <div className="temperatureRange">
-            <p><FaTemperatureHigh /> 20&deg;C || <FaTemperatureLow /> 10&deg;C</p>
-            <p>Humidity: 15%</p>
+            <p><FaTemperatureHigh /> {parseFloat(weatherData.main.temp_max).toFixed(1)} &deg;C || <FaTemperatureLow /> {parseFloat(weatherData.main.temp_min).toFixed(1)} &deg;C</p>
+            <p>Humidity: {weatherData.main.humidity} %</p>
             <p>Wind speed: 5kph</p>
           </div>
           <div>
