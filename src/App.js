@@ -50,7 +50,7 @@ import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 function App() {
   // useStates were created here for the weather data from component as well as the search city query.
   // Initializae useState for API data.
-  const [weatherData, setWeatherData] = useState([]);
+  const [weatherData, setWeatherData] = useState(null);
   // useState for saving input from the user and returning a value based on the city that the user typed in the search field.
   const [searchCity, setSearchCity] = useState('Toronto');
   // const [loading, setLoading] = useState(false);
@@ -143,13 +143,16 @@ function App() {
         <button className="submit" onClick={ () => setWeatherData(searchCity)}>Get Forecast</button>
       </fieldset>
 
-      {/* Forecast information will be passed into the following elements and displayed here: */}
-      {/* {weatherData( (data) => { */}
       
+      
+      <>
+      {/* Conditional was required over container for API as large data request slowed down data response and led to page errors. This error checks uses the initial null state for useState and then checks that it is truthy to access the rest of the object API information when it is updated.  */}
+      {/* Forecast information will be passed into the following elements and displayed within the main container */}
+      {weatherData !== null ? (
         <main className="weatherResultsContainer">
           <h2>Forecast</h2>
           <div className="iconImage">
-            <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} alt="imageicon"/>
+            <img src={`https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} alt="imageicon"/>
           </div>
           <div className="temperature">
             <p>Temp: {parseFloat(weatherData.main.temp).toFixed(1)} &deg;C</p>
@@ -159,15 +162,16 @@ function App() {
           <div className="temperatureRange">
             <p><FaTemperatureHigh /> {parseFloat(weatherData.main.temp_max).toFixed(1)} &deg;C || <FaTemperatureLow /> {parseFloat(weatherData.main.temp_min).toFixed(1)} &deg;C</p>
             <p>Humidity: {weatherData.main.humidity} %</p>
-            <p>Wind speed: 5kph</p>
+            <p>Wind speed: {weatherData.wind.speed} meters/sec</p>
           </div>
           <div>
-            <h3><GiModernCity /> Toronto | Canada</h3>
+            <h3><GiModernCity /> {weatherData.name} | {weatherData.sys.country}</h3>
           </div>
         </main>
-        
+      ) : null}
+      </>
       
-      
+
       {/* <section className="temperature">
         <> 
             <h2>Temperature & Humidity:</h2>    
