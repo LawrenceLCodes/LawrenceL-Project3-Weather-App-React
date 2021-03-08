@@ -7,6 +7,7 @@ import { getWeatherData } from './GetWeatherApi.js';
 import { WiDaySunny, WiCloudy, WiDayRainWind } from 'react-icons/wi';
 import { GiModernCity } from 'react-icons/gi';
 import { GiAtom, GiSpaceship } from 'react-icons/gi';
+import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 
 // Pseudo Code:
 // MVP:
@@ -148,15 +149,15 @@ function App() {
         <main className="weatherResultsContainer">
           <h2>Forecast</h2>
           <div className="iconImage">
-            <img src={`http://openweathermap.org/img/w/${setWeatherData.weather[0].icon}.png`} alt="imgicon"/>
+            {/* <img src={`http://openweathermap.org/img/w/${setWeatherData.weather[0].icon}.png`} alt="imgicon"/> */}
           </div>
-          <p>Cloudy with a chance of rain</p>
           <div className="temperature">
-            <p>22&deg;C</p>
+            <p>Temp: 22&deg;C</p>
             <p>Feels like: 26&deg;</p>
           </div>
+          <p>Cloudy with a chance of rain</p>
           <div className="temperatureRange">
-            <p>High: 20&deg;C || Low: 10&deg;C</p>
+            <p><FaTemperatureHigh /> 20&deg;C || <FaTemperatureLow /> 10&deg;C</p>
             <p>Humidity: 15%</p>
             <p>Wind speed: 5kph</p>
           </div>
