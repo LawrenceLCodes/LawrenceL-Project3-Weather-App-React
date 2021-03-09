@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import { useEffect, useState } from 'react';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 import axios from 'axios';
 import {mySwal} from './SweetAlert.js';
 import { getWeatherData } from './GetWeatherApi.js';
-import { WiDaySunny, WiCloudy, WiDayRainWind } from 'react-icons/wi';
+import { WiDaySunny, WiCloudy } from 'react-icons/wi';
 import { GiModernCity } from 'react-icons/gi';
 import { GiAtom, GiSpaceship } from 'react-icons/gi';
 import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
@@ -53,7 +54,30 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   // useState for saving input from the user and returning a value based on the city that the user typed in the search field.
   const [searchCity, setSearchCity] = useState('Toronto');
-  // const [loading, setLoading] = useState(false);
+  const [textInput, setTextInput] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+  // function handleClick(event) {
+  //   event.preventDefault();
+  // }
+
+  // const getCityWeather = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const cityData = await weatherData(textInput);
+  //     setWeatherData(cityData);
+  //   } catch(error) {
+  //     console.log(error.message);
+  //     setLoading(false);
+  //   }
+  // }
+  // storing styling information inside a variable for loading animation as per react-spinners documentation https://www.npmjs.com/package/react-spinners
+  const override = `
+    display: block;
+    margin: 0 auto;
+    border-color: sky-blue;
+  `; 
 
   // const displayWeatherData = async () => {
   //   try{
@@ -88,6 +112,8 @@ function App() {
   //   }
   // }
 
+  
+  
 
 // The following useEffect Hook is required to obtain the API data from Open Weather map.
   useEffect( () => {
@@ -103,13 +129,13 @@ function App() {
         appid: apiKey,
         lang: "en",
         units: "metric",
-        q: 'Toronto',
+        q: searchCity,
       }
     }).then( (response) => {
-      // console.log(response);
-      
+      console.log(response);
       setWeatherData(response.data);
-    });
+    })
+  
   // Catch is used to generate an alert if an incompatible city name has been entered. 
   // .catch(error => mySwal({
   //     title: "City Name Not Found",
@@ -118,9 +144,14 @@ function App() {
   //     timer: 4000,
   //   })
   // );
-  }, []);
+  }, [searchCity]);
 
-  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSearchCity(textInput);
+    setTextInput('');
+  }
 
   return (
     <div className="App wrapper">
@@ -129,22 +160,26 @@ function App() {
       </header>
       
 
-      <fieldset className="searchForm">
+      <form className="searchForm" onSubmit={handleSubmit}>
         {/* Text field where user will type in the city for their desired weather forecast */}
         <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
         <input type="text"
         className="searchField" 
         placeholder="Enter your city"
-        onChange={event => setSearchCity(event.target.value)}
-        value={searchCity}
+        onChange={ (event) => setTextInput(event.target.value) }
+        value={textInput}
         />
 
          {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
-        <button className="submit" onClick={ () => setWeatherData(searchCity)}>Get Forecast</button>
-      </fieldset>
+        <button className="submit" >Get Forecast</button>
+      </form>
 
-      
-      
+      {/* Loading container for animation to display until site is fully loaded */}
+      {loading ? (
+        <div className="loaderContainer">
+          <PacmanLoader css={override} size={50} color={'#e61809'} loading={loading} />
+        </div>
+      ) :( 
       <>
       {/* Conditional was required over container for API as large data request slowed down data response and led to page errors. This error checks uses the initial null state for useState and then checks that it is truthy to access the rest of the object API information when it is updated.  */}
       {/* Forecast information will be passed into the following elements and displayed within the main container */}
@@ -158,9 +193,8 @@ function App() {
             <p>Temp: {parseFloat(weatherData.main.temp).toFixed(1)} &deg;C</p>
             <p>Feels like: {parseFloat(weatherData.main.feels_like).toFixed(1)} &deg;C</p>
           </div>
-          <p>Cloudy with a chance of rain</p>
           <div className="temperatureRange">
-            <p><FaTemperatureHigh /> {parseFloat(weatherData.main.temp_max).toFixed(1)} &deg;C || <FaTemperatureLow /> {parseFloat(weatherData.main.temp_min).toFixed(1)} &deg;C</p>
+            <p><FaTemperatureHigh /> {parseFloat(weatherData.main.temp_max).toFixed(1)} &deg;C  ||  <FaTemperatureLow /> {parseFloat(weatherData.main.temp_min).toFixed(1)} &deg;C</p>
             <p>Humidity: {weatherData.main.humidity} %</p>
             <p>Wind speed: {weatherData.wind.speed} meters/sec</p>
           </div>
@@ -170,27 +204,7 @@ function App() {
         </main>
       ) : null}
       </>
-      
-
-      {/* <section className="temperature">
-        <> 
-            <h2>Temperature & Humidity:</h2>    
-            <p>Temperature: {weatherData.main.temp}</p>
-            <p>Feels like: {weatherData.main.feels_like}</p>
-            <p>High: {weatherData.main.temp_max}</p>
-            <p>Low: {weatherData.main.temp_min}</p>
-            <p>Humidity: {weatherData.main.humidity}</p>
-            <p>Atmospheric Pressure: {weatherData.main.pressure}</p>
-        </>
-      </section> */}
-        
-      {/* <section className="conditions">
-        <h3>Weather Conditions:</h3>
-        <div>
-          {weatherData.weather[0].main}
-          <p>{weatherData.wind.speed} meters/sec</p>
-        </div>
-      </section> */}
+      )}
         
       
 

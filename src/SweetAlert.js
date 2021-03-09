@@ -5,23 +5,21 @@
 
 //     const mySwal = withReactContent(Swal)
 
-//     mySwal.fire({
-//         title: <p>Welcome!</p>,
-//         didOpen: () => {
-//             // `MySwal` is a subclass of `Swal`
-//             //   with all the same instance & static methods
-//             mySwal.clickConfirm()
+//     mySwal({
+//         title: 'Error!',
+//         text: 'Could not load your weather data, please try again',
+//         icon: error,
+//         timer: 3000
 //         }
-//     }).then(() => {
-//         return mySwal.fire(<p>Welcome! Please type in your city for today's forecast!</p>)
-//     })
-//     // Catch is used to generate an alert if an incompatible city name has been entered. 
-//     // .catch(err => mySwal({
-//     //     title: "City Name Not Found",
-//     //     icon: "error",
-//     //     text: "Please check your entry and try again!",
-//     //     timer: 4000,
-//     // })
-//     // );
+//     });
+    // Catch is used to generate an alert if an incompatible city name has been entered. 
+    // .catch(error => mySwal({
+    //     title: "City Name Not Found",
+    //     icon: "error",
+    //     text: "Please check your entry and try again!",
+    //     timer: 4000,
+    // })
+    // );
+    
 
 // export default mySwal;
