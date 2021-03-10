@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
 import { useEffect, useState } from 'react';
-import PacmanLoader from 'react-spinners/PacmanLoader';
 import axios from 'axios';
-import {mySwal} from './SweetAlert.js';
+// import {mySwal} from './SweetAlert.js';
 import { getWeatherData } from './GetWeatherApi.js';
 import { WiDaySunny, WiCloudy } from 'react-icons/wi';
-import { GiModernCity } from 'react-icons/gi';
 import { GiAtom, GiSpaceship } from 'react-icons/gi';
-import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
+import UserSelectCity from './UserSelectCity.js';
 
 // Pseudo Code:
 // MVP:
@@ -17,7 +15,7 @@ import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 // Results will include: 
 // Temperature, 
 // Conditions such as rain, snow etc.
-// Open Weather API will be used for obtaining weather data due to reliability and 			recommendations from fellow Juno Cohort. https://openweathermap.org/api
+// Open Weather API will be used for obtaining weather data due to reliability and recommendations from fellow Juno Cohort. https://openweathermap.org/api
 // API Key has been obtained and will be used for API calls.
 // Form Field will include error handling to notify the user if they did not enter in a viable city. This will be accomplished through an alert that is modified using the Sweet Alert JS which can be accessed here if approved: 
 // https://sweetalert2.github.io/#download
@@ -25,21 +23,15 @@ import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 
 // Stretch Goals:
 // Icons and/or animations for weather conditions (i.e. animated rain cloud for a rainy day) might be implemented in the future.
-// Additional data including multi-day forecasts.
+// Multi-day forecasts.
 // Autocomplete for location including suggestions for city through the use of a second API.
 // Additional backgrounds, animated backgrounds, additional graphical icons for styling are being considered to improve aesthetics.
 // Toggle for light and dark mode. 
-
-
-// Main App will house primary JSX
+// A selector to toggle between Celsius and Farenheit.
 
 // One js file used for sweet alert error handling - this will run when the user does not enter any city name or one that does not match the information in the API data. This will be exported to main app.js
 
-// Styling will be handled either regular CSS or SCSS (If I can get it running for react).
-
 // handleClick will be the primary and most important event as it will signal to React to call the API and return the relevant weather information from the API.
-
-// Considering a selector for celsius and Farenheit.
 
 
 // const api = {
@@ -51,33 +43,26 @@ import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 function App() {
   // useStates were created here for the weather data from component as well as the search city query.
   // Initializae useState for API data.
-  const [weatherData, setWeatherData] = useState(null);
+  // const [weatherData, setWeatherData] = useState(null);
   // useState for saving input from the user and returning a value based on the city that the user typed in the search field.
   const [searchCity, setSearchCity] = useState('Toronto');
-  const [textInput, setTextInput] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const [textInput, setTextInput] = useState('');
+  // const [loading, setLoading] = useState(false);
 
-
-  // function handleClick(event) {
-  //   event.preventDefault();
-  // }
-
-  // const getCityWeather = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const cityData = await weatherData(textInput);
-  //     setWeatherData(cityData);
-  //   } catch(error) {
-  //     console.log(error.message);
-  //     setLoading(false);
-  //   }
-  // }
-  // storing styling information inside a variable for loading animation as per react-spinners documentation https://www.npmjs.com/package/react-spinners
-  const override = `
-    display: block;
-    margin: 0 auto;
-    border-color: sky-blue;
-  `; 
+  
+  // Storing styling information inside a variable for loading animation as per react-spinners documentation https://www.npmjs.com/package/react-spinners
+  // const override = `
+  //   display: block;
+  //   margin: 0 auto;
+  //   border-color: sky-blue;
+  // `;
+  
+  // const ErrorData = {
+  //   title: "Oops..",
+  //   type: "error",
+  //   text: "Something went wrong!",
+  //   footer: "<a href>Why do I have this issue?</a>"
+  // };
 
   // const displayWeatherData = async () => {
   //   try{
@@ -134,23 +119,26 @@ function App() {
     }).then( (response) => {
       console.log(response);
       setWeatherData(response.data);
+    }).catch(error => {
+      return alert('You have not entered a compatible city name, please try again!');
     })
-  
-  // Catch is used to generate an alert if an incompatible city name has been entered. 
-  // .catch(error => mySwal({
-  //     title: "City Name Not Found",
-  //     icon: "error",
-  //     text: "Please check your entry and try again!",
-  //     timer: 4000,
-  //   })
-  // );
+  // Catch is used to generate an alert if an incompatible city name has been entered.
   }, [searchCity]);
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setSearchCity(textInput);
+  //   setTextInput('');
+  // }
+
+  // cityResults variable is the one that needs to be passed through:
+  const cityResults = () => {
     setSearchCity(textInput);
-    setTextInput('');
+  }
+
+  const allWeatherResults = () => {
+    
   }
 
   return (
@@ -160,19 +148,23 @@ function App() {
       </header>
       
 
-      <form className="searchForm" onSubmit={handleSubmit}>
+      {/* <form className="searchForm" onSubmit={handleSubmit}> */}
         {/* Text field where user will type in the city for their desired weather forecast */}
-        <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
+        {/* <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
         <input type="text"
         className="searchField" 
         placeholder="Enter your city"
         onChange={ (event) => setTextInput(event.target.value) }
         value={textInput}
-        />
+        /> */}
 
          {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
-        <button className="submit" >Get Forecast</button>
-      </form>
+        {/* <button className="submit" >Get Forecast</button>
+      </form> */}
+
+      <UserSelectCity cityResults={cityResults} />
+
+      <DisplayWeatherResults allWeatherResults={allWeatherResults}/>
 
       {/* Loading container for animation to display until site is fully loaded */}
       {loading ? (
