@@ -47,7 +47,7 @@ a {
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 100vh;
+  height: 120vh;
 }
 
 .mainTitle {
@@ -93,7 +93,7 @@ a {
   width: 60%;
   margin: auto;
   margin-bottom: 50px;
-  margin-top: 30px;
+  margin-top: 50px;
   border: 2px solid midnightblue;
   border-radius: 15px;
   box-shadow: 10px 15px navy;
@@ -159,6 +159,10 @@ a {
 }
 
 /* Media queries:  */
+@media screen and (min-width: 1200px) {
+
+}
+
 @media screen and (max-width: 710px) {
   .submit {
     width: 22%;
