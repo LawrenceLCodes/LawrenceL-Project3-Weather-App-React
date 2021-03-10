@@ -4,7 +4,7 @@ import { useState } from 'react';
 const UserSelectCity = (props) => {
     const { cityResults } = props;
 
-    // useState initializie for saving input text from the user
+    // useState initialize for saving input text from the user
     const [textInput, setTextInput] = useState('');
 
     const handleSubmit = (event) => {
@@ -24,7 +24,7 @@ const UserSelectCity = (props) => {
             value={textInput}
             />
 
-            {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
+            {/* Once appropriate city name is typed in then user will click button to receive their forecast. pressing the enter key also works since handleSubmit event was placed on the form itself. */}
             <button className="submit" >Get Forecast</button>
         </form>
     )

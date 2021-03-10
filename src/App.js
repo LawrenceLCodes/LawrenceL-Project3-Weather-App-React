@@ -4,10 +4,9 @@
 // base url: 'https://api.openweathermap.org/data/2.5/weather/',
 
 // Results will include: 
-// Temperature, conditions such as rain, snow, clouds etc.
+// Temperature, conditions such as rain, snow, clouds, high and low, humidity etc.
 // API Key has been obtained and will be used for API calls.
-// Form Field will include error handling to notify the user if they did not enter in a viable city. This will be accomplished through an alert that is modified using the Sweet Alert JS which can be accessed here if approved: 
-// https://sweetalert2.github.io/#download
+// Error handling will be included to notify the user if they did not enter in a viable city.
 
 // Stretch Goals:
 // Icons and/or animations for weather conditions (i.e. animated rain cloud for a rainy day) might be implemented in the future.
@@ -16,7 +15,7 @@
 // Additional backgrounds, animated backgrounds, additional graphical icons for styling are being considered to improve aesthetics.
 // Toggle for light and dark mode. 
 // A selector to toggle between Celsius and Farenheit.
-// One js file used for sweet alert error handling - this will run when the user does not enter any city name or one that does not match the information in the API data. This will be exported to main app.js.
+// One js file used for sweet alert error handling - this will run when the user does not enter any city name or one that does not match the information in the API data. This will be exported to main app.js. https://sweetalert2.github.io/#download 
 
 import React from 'react';
 import './App.css';
