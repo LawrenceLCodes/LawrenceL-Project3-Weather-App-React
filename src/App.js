@@ -53,7 +53,6 @@ function App() {
         q: searchCity,
       }
     }).then( (response) => {
-      console.log(response);
       setWeatherData(response.data);
     }).catch(error => {
       return alert('You have not entered a compatible city name, please try again!');

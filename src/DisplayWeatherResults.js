@@ -24,6 +24,7 @@ const DisplayWeatherResults = (props) => {
     // Loading container for animation to display until site is fully loaded.  
     <>
       {loading ? (
+        setLoading(true),
         <div className="loaderContainer">
           <PacmanLoader css={override} size={50} color={'#e61809'} loading={loading} />
         </div>
