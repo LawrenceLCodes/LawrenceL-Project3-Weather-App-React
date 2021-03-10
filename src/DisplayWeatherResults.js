@@ -1,4 +1,5 @@
-// Component with weather results container that is used to hold and display API data after user has typed in their desired city in the search field
+// Component with weather results container that is used to hold and display API data after user has typed in their desired city in the search field.
+// props is used to pass in weatherData from axios on App.js. 
 
 import { useState } from 'react';
 import PacmanLoader from 'react-spinners/PacmanLoader';
@@ -9,6 +10,7 @@ import { FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
 const DisplayWeatherResults = (props) => {
   // useState initialization for loading mechanism so that animation will run if API data takes a long time to generate onto page.
   const [loading, setLoading] = useState(false);
+
   // Storing styling information inside a variable for loading animation as per react-spinners documentation https://www.npmjs.com/package/react-spinners
   const override = `
       display: block;
@@ -19,7 +21,7 @@ const DisplayWeatherResults = (props) => {
   const { allWeatherResults } = props;
     
   return (
-    // Loading container for animation to display until site is fully loaded  
+    // Loading container for animation to display until site is fully loaded.  
     <>
       {loading ? (
         <div className="loaderContainer">
@@ -29,11 +31,13 @@ const DisplayWeatherResults = (props) => {
       <>
         {/* Conditional was required over container for API as large data request slowed down data response and led to page errors. This error check uses the initial null state for useState and then checks that it is truthy to access the rest of the object API information when it is updated.  */}
         {/* Forecast information will be passed into the following elements and displayed within the main container */}
+        {/* weatherData is from axios method on App.js. It is being passed to this component via props into allWeatherResults which is then used to make use of that API data which is stored in an object. */}
         {allWeatherResults !== null ? (
           <main className="weatherResultsContainer">
             <h2>Forecast</h2>
+            <h3 className="weatherDescription">{allWeatherResults.weather[0].description}</h3>
             <div className="iconImage">
-              <img src={`https://openweathermap.org/img/w/${allWeatherResults.weather[0].icon}.png`} alt="imageicon"/>
+              <img src={`https://openweathermap.org/img/w/${allWeatherResults.weather[0].icon}.png`} alt={allWeatherResults.weather[0].main}/>
             </div>
             <div className="temperature">
               <p>Temp: {parseFloat(allWeatherResults.main.temp).toFixed(1)} &deg;C</p>

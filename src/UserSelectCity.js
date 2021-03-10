@@ -13,21 +13,20 @@ const UserSelectCity = (props) => {
     }
 
     return (
-    <form className="searchForm" onSubmit={handleSubmit}>
-        {/* Text field where user will type in the city for their desired weather forecast */}
-        <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
-        <input type="text"
-        className="searchField" 
-        placeholder="Enter your city"
-        onChange={ (event) => setTextInput(event.target.value) }
-        value={textInput}
-        />
+        <form className="searchForm" onSubmit={handleSubmit}>
+            {/* Text field where user will type in the city for their desired weather forecast */}
+            <label htmlFor="searchField" className="searchField sr-only">Enter your city in the search field</label>
+            <input type="text"
+            className="searchField" 
+            placeholder="Enter your city"
+            onChange={ (event) => setTextInput(event.target.value) }
+            value={textInput}
+            />
 
-         {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
-        <button className="submit" >Get Forecast</button>
-    </form>
+            {/* Once appropriate city name is typed in then user will click button to receive their forecast */}
+            <button className="submit" >Get Forecast</button>
+        </form>
     )
-
 }
 
 export default UserSelectCity;
