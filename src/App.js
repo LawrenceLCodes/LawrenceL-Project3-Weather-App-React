@@ -134,6 +134,8 @@ function App() {
     }).then( (response) => {
       console.log(response);
       setWeatherData(response.data);
+    }).catch(error => {
+      return alert('You have entered in a city name which is incompatible, please try again!');
     })
   
   // Catch is used to generate an alert if an incompatible city name has been entered. 
