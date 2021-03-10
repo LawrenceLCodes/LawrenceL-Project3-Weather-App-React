@@ -30,9 +30,9 @@ const DisplayWeatherResults = (props) => {
         </div>
       ) :( 
       <>
-        {/* Conditional was required over container for API as large data request slowed down data response and led to page errors. This error check uses the initial null state for useState and then checks that it is truthy to access the rest of the object API information when it is updated.  */}
+        {/* Conditional was required over container for results from API call as large data request slowed down response and led to page errors. This error check uses the initial null state for useState and then checks that it is truthy to access the rest of the object API information when it is updated.  */}
         {/* Forecast information will be passed into the following elements and displayed within the main container */}
-        {/* weatherData is from axios method on App.js. It is being passed to this component via props into allWeatherResults which is then used to make use of that API data which is stored in an object. */}
+        {/* weatherData is from axios method on App.js. It is being passed to this component via props into allWeatherResults which is then used for API data. API data is stored in an object instead of an array since .map was not required. */}
         {allWeatherResults !== null ? (
           <main className="weatherResultsContainer">
             <h2>Forecast</h2>
