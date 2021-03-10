@@ -159,10 +159,6 @@ a {
 }
 
 /* Media queries:  */
-@media screen and (min-width: 1200px) {
-
-}
-
 @media screen and (max-width: 710px) {
   .submit {
     width: 22%;
