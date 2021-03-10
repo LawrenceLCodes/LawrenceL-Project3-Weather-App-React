@@ -4,6 +4,7 @@ import { useState } from 'react';
 const UserSelectCity = (props) => {
     const { cityResults } = props;
 
+    // useState initializie for saving input text from the user
     const [textInput, setTextInput] = useState('');
 
     const handleSubmit = (event) => {

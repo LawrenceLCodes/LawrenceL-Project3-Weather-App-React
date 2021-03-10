@@ -29,10 +29,9 @@ import DisplayWeatherResults from './DisplayWeatherResults.js';
 
 
 function App() {
-  // useStates were created here for the weather data from component as well as the search city query.
-  // Initializae useState for API data.
-  // useState for saving input from the user and returning a value based on the city that the user typed in the search field.
+  // Initialize useState for API data.
   const [weatherData, setWeatherData] = useState(null);
+  // Initialize useState for query which uses value passed from UseSelectCity to obtain city weather information from the API.
   const [searchCity, setSearchCity] = useState('Toronto');
 
 
