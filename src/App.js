@@ -3,10 +3,10 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 // import {mySwal} from './SweetAlert.js';
-import { getWeatherData } from './GetWeatherApi.js';
 import { WiDaySunny, WiCloudy } from 'react-icons/wi';
 import { GiAtom, GiSpaceship } from 'react-icons/gi';
 import UserSelectCity from './UserSelectCity.js';
+import DisplayWeatherResults from './DisplayWeatherResults.js';
 
 // Pseudo Code:
 // MVP:
@@ -45,6 +45,7 @@ function App() {
   // Initializae useState for API data.
   // const [weatherData, setWeatherData] = useState(null);
   // useState for saving input from the user and returning a value based on the city that the user typed in the search field.
+  const [weatherData, setWeatherData] = useState(null);
   const [searchCity, setSearchCity] = useState('Toronto');
   // const [textInput, setTextInput] = useState('');
   // const [loading, setLoading] = useState(false);
@@ -133,13 +134,11 @@ function App() {
   // }
 
   // cityResults variable is the one that needs to be passed through:
-  const cityResults = () => {
-    setSearchCity(textInput);
+  const cityResults = (userCity) => {
+    setSearchCity(userCity);
   }
 
-  const allWeatherResults = () => {
-    
-  }
+  
 
   return (
     <div className="App wrapper">
@@ -164,18 +163,19 @@ function App() {
 
       <UserSelectCity cityResults={cityResults} />
 
-      <DisplayWeatherResults allWeatherResults={allWeatherResults}/>
+      <DisplayWeatherResults allWeatherResults={weatherData}/>
+
 
       {/* Loading container for animation to display until site is fully loaded */}
-      {loading ? (
+      {/* {loading ? (
         <div className="loaderContainer">
           <PacmanLoader css={override} size={50} color={'#e61809'} loading={loading} />
         </div>
       ) :( 
-      <>
+      <> */}
       {/* Conditional was required over container for API as large data request slowed down data response and led to page errors. This error checks uses the initial null state for useState and then checks that it is truthy to access the rest of the object API information when it is updated.  */}
       {/* Forecast information will be passed into the following elements and displayed within the main container */}
-      {weatherData !== null ? (
+      {/* {weatherData !== null ? (
         <main className="weatherResultsContainer">
           <h2>Forecast</h2>
           <div className="iconImage">
@@ -196,7 +196,7 @@ function App() {
         </main>
       ) : null}
       </>
-      )}
+      )} */}
         
       
 
