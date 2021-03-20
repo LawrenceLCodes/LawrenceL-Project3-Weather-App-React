@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { WiDaySunny, WiCloudy } from 'react-icons/wi';
 import { GiAtom, GiSpaceship } from 'react-icons/gi';
+import Swal from 'sweetalert2';
 import UserSelectCity from './UserSelectCity.js';
 import DisplayWeatherResults from './DisplayWeatherResults.js';
 
@@ -53,7 +54,13 @@ function App() {
     }).then( (response) => {
       setWeatherData(response.data);
     }).catch(error => {
-      return alert('You have entered in a city name which is incompatible, please try again!');
+      // return alert('You have entered in a city name which is incompatible, please try again!');
+      return Swal.fire ({
+        title: "error",
+        text: 'You have entered in a city name which is incompatible, please try again!',
+        icon: 'error',
+        timer: 2500
+      })
     })
   // Catch is used to generate an alert if an incompatible city name has been entered.
   }, [searchCity]);
